@@ -25,3 +25,5 @@ Route::get('/', [AuthController::class, 'index']);
 //会員登録
 Route::get('/user/register', [UserController::class, 'register'])->name('front.user.register');
 Route::post('/user/register', [UserController::class, 'user'])->name('front.user.register.post');
+
+Route::post('/login', [AuthController::class, 'login']);
