@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Shopping_list as Shopping_listModel;
 use Illuminate\Http\Request;
 
+
 class ListController extends Controller
 {
     
