@@ -9,6 +9,12 @@
         @if (session('front.shopping_list_delete_success') ==true)
             買うものを削除しました!!<br>
         @endif
+        @if (session('front.shopping_list_completed_success') == true)
+            買うものを完了にしました！！<br>
+        @endif
+        @if (session('front.shopping_list_completed_failure') == true)
+            買うものの完了に失敗しました....<br>
+        @endif
         @if ($errors->any())
                 <div>
                 @foreach ($errors->all() as $error)
@@ -32,7 +38,10 @@
         <tr>
             <td>{{ $shopping_list->created_at }}
             <td>{{ $shopping_list->name }}
-            <td><form action="/shopping_list/list"><button>完了</button></form>
+            <td><form action="{{ route('complete', ['shopping_list_id' => $shopping_list->id]) }}" method="post">
+                @csrf
+                <button onclick='return confirm("この「買うもの」を「完了」にします。よろしいですか？");'>完了</button>
+            </form>
             <td><form action="{{ route('delete', ['shopping_list_id' => $shopping_list->id]) }}" method="post">
                 @csrf
                 @method("DELETE")
