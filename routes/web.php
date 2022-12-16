@@ -34,17 +34,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/register', [ListController::class, 'register']);
         Route::delete('/delete/{shopping_list_id}', [ListController::class, 'delete'])->whereNumber('shopping_list_id')->name('delete');
         Route::post('/complete/{shopping_list_id}', [ListController::class, 'complete'])->whereNumber('shopping_list_id')->name('complete');
+        Route::get('/completed_shopping_lists/list', [CompletedListController::class, 'list']);
     });
     
     //購入済み「買うもの」一覧
-    Route::get('/completed_shopping_lists/list', [CompletedListController::class, 'list']);
+    
     
     //ログアウト
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 //管理画面
-Route::prefix('admin')->group(function () {
+Route::prefix('/admin')->group(function () {
     Route::get('', [AdminAuthController::class, 'index'])->name('admin.index');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
     Route::middleware(['auth:admin'])->group(function () {
