@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\CompletedListController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,8 +35,24 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/delete/{shopping_list_id}', [ListController::class, 'delete'])->whereNumber('shopping_list_id')->name('delete');
         Route::post('/complete/{shopping_list_id}', [ListController::class, 'complete'])->whereNumber('shopping_list_id')->name('complete');
     });
-    //
+    
+    //購入済み「買うもの」一覧
+    Route::get('/completed_shopping_lists/list', [CompletedListController::class, 'list']);
+    
+    //ログアウト
     Route::get('/logout', [AuthController::class, 'logout']);
+});
+
+//管理画面
+Route::prefix('admin')->group(function () {
+    Route::get('', [AdminAuthController::class, 'index'])->name('admin.index');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('/top', [AdminHomeController::class, 'top'])->name('admin.top');
+        Route::get('/user/list', [AdminUserController::class, 'list'])->name('admin.user.list');
+    });
+    Route::get('/logout', [AdminAuthController::class, 'logout']);
+    
 });
 
 

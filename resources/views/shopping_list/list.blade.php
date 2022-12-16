@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section('title')(買い物リスト(一覧画面))@endsection
+
 {{-- メインコンテンツ --}}
 @section('contets')
         <h1>「買うもの」の登録</h1>
@@ -29,7 +31,7 @@
         </form>
         
         <h1>「買うもの」一覧</h1>
-        <a href="/shopping_list/bought_lists/list">購入済み「買うもの」一覧</a><br>
+        <a href="/completed_shopping_lists/list">購入済み「買うもの」一覧</a><br>
         <table border="1">
         <tr>
             <th>登録日
