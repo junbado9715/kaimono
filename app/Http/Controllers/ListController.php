@@ -25,6 +25,7 @@ class ListController extends Controller
         
         //一覧の取得
         $list = Shopping_listModel::where('user_id', Auth::id())
+                                    ->orderBy('name')
                                     ->paginate($per_page);
         //
         return view('shopping_list.list', ['list' => $list]);

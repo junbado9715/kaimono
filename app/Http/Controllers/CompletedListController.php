@@ -14,7 +14,7 @@ class CompletedListController extends Controller
          $per_page = 1;
          
         $list = CompletedShopping_listModel::where('user_id', Auth::id())
-                         ->orderBy('created_at')
+                         ->orderBy('name')
                          ->paginate($per_page);
         return view('shopping_list.completed_shopping_list', ['list' => $list]);
     }
