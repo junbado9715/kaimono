@@ -44,7 +44,7 @@
                 @csrf
                 <button onclick='return confirm("この「買うもの」を「完了」にします。よろしいですか？");'>完了</button>
             </form>
-            <td>&emsp;</td>
+            <td width="15px"></td>
             <td><form action="{{ route('delete', ['shopping_list_id' => $shopping_list->id]) }}" method="post">
                 @csrf
                 @method("DELETE")
