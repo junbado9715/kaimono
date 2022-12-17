@@ -15,7 +15,7 @@ class CreateAdminUsersTable extends Migration
     {
         Schema::create('admin_users', function (Blueprint $table) {
             $table->id();
-            $table->string('login_id', 255)->unique();
+            $table->string('login_id', 191)->unique();
             $table->string('password', 255);
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
